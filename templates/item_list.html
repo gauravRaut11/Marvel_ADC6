@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  <h1>Products</h1>
+  
+  <table class="table mb-0">
+      <thead>
+         <tr>
+             <th>
+              Name
+             </th>
+             <th>
+                Category
+             </th>
+             <th>
+                Price
+             </th>
+             <th>
+               Download
+               </th>
+               <th>
+                Delete
+                </th>
+         </tr> 
+      </thead>
+      <tbody>
+          {% for Item in items %}
+          <tr>
+              <td>{{Item.title}}</td>
+              <td>{{Item.category}}</td>
+              <td>{{Item.price}}</td>
+              <td>
+            <button> <a href="{{Item.pdf.url}}" class="btn btn-primary btn-sm" target="_blank"></a>Download pdf</button>
+             </td>
+              <td> <form method="POST" action="{% url 'delete_item' Item.pk %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button> </form></td>
+          </tr> 
+          {% endfor %}
+      </tbody>
+  </table> 
+ 
+</body>
+</html>
